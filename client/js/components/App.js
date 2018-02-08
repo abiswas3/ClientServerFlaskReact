@@ -34,5 +34,4 @@ const mapStateToProps = state => ({
 })
 
 export default connect(null,
-                       null)(App)
-;
+                       null)(App);

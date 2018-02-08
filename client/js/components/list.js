@@ -44,13 +44,11 @@ let Hints = () => {
         let fontSize = 100/(Math.log10(index+2))+"%";        
         let heightPad = 50 + 10/(index+1);
         
-        console.log(index);
         style = {...style, "top" : heightPad*index + 15,
                  "height": heightPad,
                  "textAlign": "center",
                  "fontSize": fontSize};
                  
-        console.log(style);
         return (
                 <div
             key={key}

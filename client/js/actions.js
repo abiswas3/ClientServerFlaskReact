@@ -2,22 +2,22 @@
 // action types
 const actions = {}
 export default actions
-actions.SEARCH_QUERY = 'SEARCH_QUERY'
-actions.SELECT_RACE = 'SELECT_RACE'
+actions.UPDATE_STORE =  'UPDATE_STORE'
+actions.BINARY_FEEDBACK = 'BINARY_FEEDBACK'
 
-export function search(query){
-
+export function binary_feedback(nature, id){
     return {
-        type: actions.SEARCH_QUERY,
-        payload: {'query': query}
+        type: actions.BINARY_FEEDBACK,
+	//+1 or -1 for like and dislike
+        payload: {'type': nature, 'id': id}
     }
 }
 
-export function select_race(selected, key){
-
+export function update_store(server_payload){
+    
     return {
-        type: actions.SELECT_RACE,
-        payload: {'selected': selected, 'key': key}
+        type: actions.UPDATE_STORE,
+        payload: server_payload
     }
 }
 

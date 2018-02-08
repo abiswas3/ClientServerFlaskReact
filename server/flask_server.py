@@ -1,7 +1,6 @@
 from flask import Flask, render_template, session, request
 from flask_socketio import SocketIO, emit
 
-
 import random
 import numpy as np
 
@@ -13,11 +12,38 @@ socketio = SocketIO(app)
 @socketio.on('connect', namespace='/interact')
 def test_connect():
     print('Client connected')
-    emit('my response', {'data': 'Connected'})
+    init_connection()
+    
 
-@socketio.on('search', namespace='/interact')
-def test_connect(msg):
-    emit('result', msg)
+def init_connection():
+
+    data_to_send_over = {'all_likes': [],
+                         'all_dislikes': [],
+                         'items': ['messi']}
+    
+    emit('result', data_to_send_over)
+    
+@socketio.on('bin_feedback', namespace='/interact')
+def interaction(msg):
+
+    old_ranking = msg['items']    
+    old_likes = msg['all_likes']
+    old_dislikes = msg['all_dislikes']    
+
+    curr_id = msg['current_item']
+    label = msg['label']
+
+    if label == 1:
+        old_likes.append(curr_id)
+    else:
+        old_dislikes.append(curr_id)
+
+
+    data_to_send_over = {'all_likes': old_likes,
+                         'all_dislikes': old_dislikes,
+                         'items': old_ranking}
+    
+    emit('result', data_to_send_over)
     
 @app.route('/')
 def index():
