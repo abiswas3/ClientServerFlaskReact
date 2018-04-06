@@ -13,17 +13,18 @@ const socketMiddleware = socket => store => next => action => {
 
     case actions.BINARY_FEEDBACK:{
 
+	
 	let state = store.getState();
-
+	console.log(action);
         socket.emit("bin_feedback",
-                    {"all_likes": state.liked,
-		     "all_dislikes": state.disliked,
-		     "current_item": action.payload.id,
-		     "label": action.payload.type,
-		     "items": state.items
+                    {"history": state.history,
+		     "ranks": state.ranks,
+		     "winner": action.payload.clicked,
+		     "left": state.left,
+		     "right": state.right
 		    }
+		    
                    )
-
     }
 
     // Currently hidden from customer view (built in for experimental purposes)
@@ -53,11 +54,9 @@ function configureStore(socket) {
                              )
 
     // Register event handlers for incoming API responses
-    socket.on('result', (msg) => {
-
-	if(msg['items'].length > 0)
-	    store.dispatch(update_store(msg))	
-
+    socket.on('result', (msg) => {	
+	if(msg['ranks'].length > 0)
+	   store.dispatch(update_store(msg))	
     })
     return store
 }

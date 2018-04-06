@@ -5,33 +5,20 @@ import { List } from 'react-virtualized';
 let Hints = () => {
 
     const list = [
-        'Lionel Messi1',
-        'Lionel Messi2',
-        'Lionel Messi3',
-        'Lionel Messi4',        
-        'Lionel Messi5',
-        'Lionel Messi6',
-        'Lionel Messi7',
-        'Lionel Messi8',                
+	"http://www.slate.com/content/dam/slate/articles/sports/sports_nut/2014/07/lionel_messi_2014_world_cup_the_world_s_best_player_has_figured_out_how/451556452-argentinas-forward-and-captain-lionel-messi-runs-with.jpg.CROP.promo-mediumlarge.jpg",
+	"http://www.slate.com/content/dam/slate/articles/sports/sports_nut/2014/07/lionel_messi_2014_world_cup_the_world_s_best_player_has_figured_out_how/451556452-argentinas-forward-and-captain-lionel-messi-runs-with.jpg.CROP.promo-mediumlarge.jpg",
+	"http://www.slate.com/content/dam/slate/articles/sports/sports_nut/2014/07/lionel_messi_2014_world_cup_the_world_s_best_player_has_figured_out_how/451556452-argentinas-forward-and-captain-lionel-messi-runs-with.jpg.CROP.promo-mediumlarge.jpg",
     ];
 
 
     let textCell = (text) =>{
+	
+	return (
 
-        return (<div >
-                <i style={{"paddingRight": "2px"}}>{text}</i>                
-                <input type="radio" name="site_name"
-                style={{"paddingLeft": "2cm"}}
-                value={"half_marathon"}
-                checked={false}
-                onClick={()=>{
-                    console.log("Clicked");
-                }
-                        }/>{}                
-                </div>)
+		<img src={text} className="image" ></img>)
+		
     }
-    
-    
+        
     function rowRenderer ({
         key,         // Unique key within array of rows
         index,       // Index of row within collection
@@ -42,7 +29,7 @@ let Hints = () => {
     {
         
         let fontSize = 100/(Math.log10(index+2))+"%";        
-        let heightPad = 50 + 10/(index+1);
+        let heightPad = 300 + 10/(index+1);
         
         style = {...style, "top" : heightPad*index + 15,
                  "height": heightPad,
@@ -63,7 +50,7 @@ let Hints = () => {
               width={300}
               height={800}
               rowCount={list.length}
-              rowHeight={60}
+              rowHeight={400}
               rowRenderer={rowRenderer}
              />) 
 }
