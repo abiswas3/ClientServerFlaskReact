@@ -1,5 +1,10 @@
 import numpy as np
 
-def train(history, shows, feats, files):
+def train(model, history, index):
 
-    pass
+    pos   = np.array([index[h['winner']] for h in history])
+    neg   = np.array([index[h['loser']]  for h in history])
+    
+    ranking_scores = model.scores(pos, neg)
+    
+    return ranking_scores

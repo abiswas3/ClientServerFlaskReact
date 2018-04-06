@@ -1,6 +1,2 @@
 numpy
-sklearn
-scipy
-flask
-flask-socketio
-eventlet
+line_profiler

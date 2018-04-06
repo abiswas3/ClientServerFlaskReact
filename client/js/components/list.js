@@ -1,14 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { List } from 'react-virtualized';
+import { connect } from 'react-redux'
 
-let Hints = () => {
-
-    const list = [
-	"http://www.slate.com/content/dam/slate/articles/sports/sports_nut/2014/07/lionel_messi_2014_world_cup_the_world_s_best_player_has_figured_out_how/451556452-argentinas-forward-and-captain-lionel-messi-runs-with.jpg.CROP.promo-mediumlarge.jpg",
-	"http://www.slate.com/content/dam/slate/articles/sports/sports_nut/2014/07/lionel_messi_2014_world_cup_the_world_s_best_player_has_figured_out_how/451556452-argentinas-forward-and-captain-lionel-messi-runs-with.jpg.CROP.promo-mediumlarge.jpg",
-	"http://www.slate.com/content/dam/slate/articles/sports/sports_nut/2014/07/lionel_messi_2014_world_cup_the_world_s_best_player_has_figured_out_how/451556452-argentinas-forward-and-captain-lionel-messi-runs-with.jpg.CROP.promo-mediumlarge.jpg",
-    ];
+let Hints = ({ranks}) => {
 
 
     let textCell = (text) =>{
@@ -29,7 +24,7 @@ let Hints = () => {
     {
         
         let fontSize = 100/(Math.log10(index+2))+"%";        
-        let heightPad = 300 + 10/(index+1);
+        let heightPad = 300 + 20/(index+1);
         
         style = {...style, "top" : heightPad*index + 15,
                  "height": heightPad,
@@ -41,7 +36,7 @@ let Hints = () => {
             key={key}
             style={style}
                 >
-                {textCell(list[index])}
+                {textCell('static/Images/'+ranks[index])}
             </div>
         )
     }
@@ -49,10 +44,17 @@ let Hints = () => {
     return (<List
               width={300}
               height={800}
-              rowCount={list.length}
+              rowCount={ranks.length}
               rowHeight={400}
               rowRenderer={rowRenderer}
              />) 
 }
 
-export default Hints
+
+const mapStateToProps = state => ({
+
+    ranks: state.ranks
+})
+
+export default connect(mapStateToProps,
+                       null)(Hints)
