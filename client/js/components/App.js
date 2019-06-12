@@ -1,28 +1,21 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Chart from './grid'
-import Hint from './list'
+import ChatWindow from './chatWindow'
+import Scores from './table'
+import Choose from './choosePage'
+import 'react-virtualized/styles.css'; // only needs to be imported once
 
-let App = function({searchQuery}){
+let App = function({page_type}){
 
     // Grid data as an array of arrays
-    const list = [
-        ['Brian Vaughn8', 'Software Engineer', 'San Jose', ],
-        ['Brian Vaughn8', 'Software Engineer', 'San Jose', ],
-        ['Brian Vaughn8', 'Software Engineer', 'San Jose', ],
-        ['Brian Vaughn8', 'Software Engineer', 'San Jose', ],
-        ['Brian Vaughn8', 'Software Engineer', 'San Jose', ],
-        ['Brian Vaughn8', 'Software Engineer', 'San Jose', ],
-        ['Brian Vaughn8', 'Software Engineer', 'San Jose', ],
-        ['Brian Vaughn8', 'Software Engineer', 'San Jose', ],
-        ['Brian Vaughn8', 'Software Engineer', 'San Jose', ],        
-        // And so on...
-    ];
-    
-    return <div className="row">
-        <div className="col-xs-3" style={{"border":"2px solid red"}}><Hint/> </div>
-        <div className="col-xs-9" style={{"backgroundColor": "#D3D3D3"}}><Chart data={list}/></div>        
-        </div>
+    // <div className="col-xs-9"><Scores/></div>
+    //
+    console.log(page_type)
+    if(page_type == "default")
+        return(<Choose/>);
+    else
+        return(<ChatWindow/>);
 }
 
 const mapDispatchToProps = {
@@ -30,8 +23,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
 
-    
+    page_type: state.page_type
 })
 
-export default connect(null,
+export default connect(mapStateToProps,
                        null)(App);

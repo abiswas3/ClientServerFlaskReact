@@ -1,33 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { List } from 'react-virtualized';
+import { AutoSizer, List } from 'react-virtualized';
 
-let Hints = () => {
+let Hints = ({chat_history}) => {
 
-    const list = [
-        'Lionel Messi1',
-        'Lionel Messi2',
-        'Lionel Messi3',
-        'Lionel Messi4',        
-        'Lionel Messi5',
-        'Lionel Messi6',
-        'Lionel Messi7',
-        'Lionel Messi8',                
-    ];
+    let row_count = chat_history.length;
+    if(row_count == undefined)
+        row_count = 0;
+    
+    let height_renderer = ({index}) =>{
+        // Assuming 50 characters a line
+        let num_lines = Math.ceil(chat_history[index]["text"].length/37)
 
 
+        // console.log(index + " " + list[index]["text"].length + ", " + num_lines);
+        // 14 is font size  + some buffer
+        return 20*num_lines + 15;
+    }
     let textCell = (text) =>{
 
         return (<div >
-                <i style={{"paddingRight": "2px"}}>{text}</i>                
-                <input type="radio" name="site_name"
-                style={{"paddingLeft": "2cm"}}
-                value={"half_marathon"}
-                checked={false}
-                onClick={()=>{
-                    console.log("Clicked");
-                }
-                        }/>{}                
+                <i style={{"paddingRight": "2px"}}>{text["text"]}</i>                
                 </div>)
     }
     
@@ -41,31 +34,39 @@ let Hints = () => {
     })
     {
         
-        let fontSize = 100/(Math.log10(index+2))+"%";        
-        let heightPad = 50 + 10/(index+1);
+        let fontSize = "14px";
+        let background = "#bed4f7";
+        if(chat_history[index]["wizard"] == true)
+            background = "#aaaaaa";
         
-        style = {...style, "top" : heightPad*index + 15,
-                 "height": heightPad,
-                 "textAlign": "center",
-                 "fontSize": fontSize};
+        style = {...style,
+                 // "height": heightPad,
+                 "fontSize": fontSize,
+                 "background": background};
                  
         return (
                 <div
             key={key}
             style={style}
                 >
-                {textCell(list[index])}
+                {textCell(chat_history[index])}
             </div>
         )
     }
-    
-    return (<List
-              width={300}
-              height={800}
-              rowCount={list.length}
-              rowHeight={60}
-              rowRenderer={rowRenderer}
-             />) 
-}
 
+
+        
+    return (<AutoSizer>
+            {({ height, width }) => {
+                return(<List
+                       height={height}
+                       rowCount={row_count}
+                       rowHeight={height_renderer}
+                       rowRenderer={rowRenderer}
+                       width={width + 10}
+                       />);
+            }}
+            </AutoSizer>) 
+}
 export default Hints
+

@@ -1,53 +1,115 @@
 from flask import Flask, render_template, session, request
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, join_room, emit, send
 
 import random
 import numpy as np
+import pprint as pp
+import helpers
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = str(random.random())
 
 socketio = SocketIO(app)
 
+apprentice_queue = []
+wizard_queue = []
+wiz_to_app = {}
+app_to_wiz = {}
+
 @socketio.on('connect', namespace='/interact')
 def test_connect():
     print('Client connected')
-    init_connection()
+    # init_connection()
+
+
+# Still need to put these guys in rooms and make sure they talk to
+# only each other
+@socketio.on('chat', namespace='/interact')
+def chat(msg):
+    print("Connected type", msg["type"])
+    room = msg["room"]
+    text =  msg["chat_history"] + [{"wizard": helpers.is_wizard(msg['type']), "text": msg["message"]}]
+
+    print("Sending", text)
+    data_to_send_over = {"chat_history": text}
     
+    emit("server_chat", data_to_send_over, room=room)
 
-def init_connection():
+@socketio.on('initial_choice', namespace='/interact')
+def initial_choice(msg):
 
-    data_to_send_over = {'all_likes': [],
-                         'all_dislikes': [],
-                         'items': ['messi']}
+    page_type =  msg["type"]    
+    exp_id = str(np.random.random())    
+    data_to_send_over = {"experiment_id": exp_id,
+                         "chat_history": [],
+                         "available": True}
     
-    emit('result', data_to_send_over)
-    
-@socketio.on('bin_feedback', namespace='/interact')
-def interaction(msg):
+    if helpers.is_wizard(page_type):
+        for client in apprentice_queue:
+            if client["available"]:
+                print("Idle apprentice found")
+                data_to_send_over['available'] = False
+                data_to_send_over['room'] = client['room']
+                client["available"] = False                
+                # At this point there is a match
+                # I should prepare this for logging but we shall see
+                # just use the partners room
+                join_room(client['room'])
+                emit("server_chat", data_to_send_over,
+                     room = client['room'])
 
-    old_ranking = msg['items']    
-    old_likes = msg['all_likes']
-    old_dislikes = msg['all_dislikes']    
+                pp.pprint(wizard_queue)
+                print()
+                pp.pprint(apprentice_queue)
+                
+                return 
 
-    curr_id = msg['current_item']
-    label = msg['label']
 
-    if label == 1:
-        old_likes.append(curr_id)
+        # I got here there is no partner
+        # I need my own room
+        wizard_queue.append(data_to_send_over)                    
+        print("No partner for wizard")
+        
+        data_to_send_over["room"] = str(np.random.random())            
+        join_room(data_to_send_over["room"])                
+        emit('setup', data_to_send_over)
+
     else:
-        old_dislikes.append(curr_id)
+        for client in wizard_queue:
+            if client["available"]:
+                print("Idle wizard found")
+                data_to_send_over['available'] = False
+                data_to_send_over['room'] = client['room']
+                client["available"] = False
+                # At this point there is a match
+                # I should prepare this for logging but we shall see
+                # just use the partners room
+                join_room(client['room'])
+                emit("server_chat", data_to_send_over,
+                     room = client['room'])
 
+                pp.pprint(wizard_queue)
+                print()
+                pp.pprint(apprentice_queue)
+                
+                return 
 
-    data_to_send_over = {'all_likes': old_likes,
-                         'all_dislikes': old_dislikes,
-                         'items': old_ranking}
-    
-    emit('result', data_to_send_over)
-    
+        # I got here there is no partner
+        # I need my own room
+        apprentice_queue.append(data_to_send_over)
+        print("No partner for apprentice")        
+        data_to_send_over["room"] = str(np.random.random())            
+        join_room(data_to_send_over["room"])                
+        emit('setup', data_to_send_over)
+        
+    pp.pprint(wizard_queue)
+    print()
+    pp.pprint(apprentice_queue)
+
+        
 @app.route('/')
 def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-        socketio.run(app, debug=True, host='0.0.0.0')
+        socketio.run(app, debug=False, host='0.0.0.0')

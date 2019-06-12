@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Grid } from 'react-virtualized';
 import { connect } from 'react-redux'
-import {binary_feedback} from '../actions'
+
+import 'react-virtualized/styles.css'; // only needs to be imported once
 
 const COLUMN_COUNT = 3
 let Chart = ({feedback, items}) => {
@@ -13,7 +14,7 @@ let Chart = ({feedback, items}) => {
 
 	let linkPath = ""
 	if(id < items.length)
-            linkPath="http://www.slate.com/content/dam/slate/articles/sports/sports_nut/2014/07/lionel_messi_2014_world_cup_the_world_s_best_player_has_figured_out_how/451556452-argentinas-forward-and-captain-lionel-messi-runs-with.jpg.CROP.promo-mediumlarge.jpg";
+            linkPath="https://www.formula1.com/content/fom-website/en/drivers/hall-of-fame/Ayrton_Senna/_jcr_content/featureContent/manual_gallery/image1.img.640.medium.jpg/1421858452652.jpg";
 	
         return (<div className={"container"}>
              
@@ -61,7 +62,6 @@ let Chart = ({feedback, items}) => {
 
 const mapDispatchToProps = {
 
-    feedback : binary_feedback
 }
 
 const mapStateToProps = state => ({
