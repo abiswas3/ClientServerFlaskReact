@@ -18,10 +18,11 @@ let App = function({searchQuery}){
         ['Brian Vaughn8', 'Software Engineer', 'San Jose', ],        
         // And so on...
     ];
-    
+
+        // <div className="col-xs-3" style={{"border":"2px solid red"}}><Hint/> </div>
     return <div className="row">
-        <div className="col-xs-3" style={{"border":"2px solid red"}}><Hint/> </div>
-        <div className="col-xs-9" style={{"backgroundColor": "#D3D3D3"}}><Chart data={list}/></div>        
+
+        <div className="col-xs-12"> <Chart data={list}/></div>        
         </div>
 }
 

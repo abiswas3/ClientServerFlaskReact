@@ -19,14 +19,42 @@ def init_connection():
 
     data_to_send_over = {'all_likes': [],
                          'all_dislikes': [],
-                         'items': ['messi']}
+                         'items': [[{'is_flipped': True},
+                                   {'is_flipped': False},
+                                   {'is_flipped': True}],
+                                   
+                                   [{'is_flipped': True},
+                                   {'is_flipped': False},
+                                   {'is_flipped': True}],
+
+                                   [{'is_flipped': True},
+                                   {'is_flipped': False},
+                                   {'is_flipped': True}],                                   
+
+                                   [{'is_flipped': True},
+                                   {'is_flipped': False},
+                                   {'is_flipped': True}],                                   
+
+                                   [{'is_flipped': True},
+                                   {'is_flipped': False},
+                                   {'is_flipped': True}],                                   
+
+                                   [{'is_flipped': True},
+                                   {'is_flipped': False},
+                                   {'is_flipped': True}],                                   
+                                   
+                         ]
+    }
     
     emit('result', data_to_send_over)
     
 @socketio.on('bin_feedback', namespace='/interact')
 def interaction(msg):
 
-    old_ranking = msg['items']    
+    for row in msg['items']:
+        for item in row:
+            item['is_flipped'] = True if np.random.random() < 0.5 else False
+            
     old_likes = msg['all_likes']
     old_dislikes = msg['all_dislikes']    
 
@@ -41,7 +69,7 @@ def interaction(msg):
 
     data_to_send_over = {'all_likes': old_likes,
                          'all_dislikes': old_dislikes,
-                         'items': old_ranking}
+                         'items': msg['items']}
     
     emit('result', data_to_send_over)
     

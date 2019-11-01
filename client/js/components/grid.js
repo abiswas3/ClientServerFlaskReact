@@ -1,46 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Grid } from 'react-virtualized';
+import IImgCell from './interactive_image_cell'
 import { connect } from 'react-redux'
 import {binary_feedback} from '../actions'
 
 const COLUMN_COUNT = 3
 let Chart = ({feedback, items}) => {
  
-    let imageCell = (id) =>{
+    let imageCell = (rowIndex, columnIndex) =>{
 
-	console.log(id);
-
-	let linkPath = ""
-	if(id < items.length)
-            linkPath="http://www.slate.com/content/dam/slate/articles/sports/sports_nut/2014/07/lionel_messi_2014_world_cup_the_world_s_best_player_has_figured_out_how/451556452-argentinas-forward-and-captain-lionel-messi-runs-with.jpg.CROP.promo-mediumlarge.jpg";
-	
-        return (<div className={"container"}>
-             
-             <img src={linkPath} className="image" ></img>
-
-                <div className="middle">
-            <div className="btn-group">
-                <button className="btn btn-primary" onClick={()=>feedback(1, id)}><i className="em em---1"></i></button>
-                <button className="btn btn-primary" onClick={()=>feedback(-1, id)}><i className="em em--1"></i></button>
-                                
-                </div>
-                
-            </div>
-
-            </div>)
+	    let linkPath = "https://the-drive.imgix.net/https%3A%2F%2Fapi.thedrive.com%2Fwp-content%2Fuploads%2F2019%2F03%2FGettyImages-1131427174.jpg%3Fquality%3D85?w=1440&auto=compress%2Cformat&ixlib=js-1.4.1&s=8ef2fc9b7b4746f614114b6e40c11ad9"
+        
+	    return (<IImgCell imgToShow={linkPath} feedback={feedback} flagOn={items[rowIndex][columnIndex]['is_flipped']}/>);
     }
 
     function cellRenderer ({columnIndex, key, rowIndex, style }) {
 
-	let index = COLUMN_COUNT*rowIndex + columnIndex
+	let index = rowIndex + columnIndex
 	    
         return (
             <div
             key={key}
             style={style}
             >
-            {imageCell(index)}
+                {imageCell(rowIndex, columnIndex)}
             </div>
         )  
 
@@ -50,11 +34,11 @@ let Chart = ({feedback, items}) => {
     return   <Grid
     cellRenderer={cellRenderer}
     columnCount={COLUMN_COUNT}
-    rowCount={Math.ceil(items.length/COLUMN_COUNT)}
-    columnWidth={280}    
-    rowHeight={200}
+    rowCount={Math.ceil(items.length)}
+    columnWidth={380}    
+    rowHeight={300}
     height={800}    
-    width={1200}
+    width={1600}
     />
 }
 
