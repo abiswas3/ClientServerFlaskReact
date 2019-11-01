@@ -4,7 +4,8 @@ import actions from './actions'
 export const State = Immutable.Record({
     'liked': [],
     'disliked': [],
-    'items': []
+    'items': [],
+    'chat_history': []
 })
 
 // store reducer function
@@ -14,11 +15,18 @@ export function reducer(state, action) {
 
     case actions.UPDATE_STORE:{
 
-        let payload = action.payload
- 	
-        state = state.setIn(['liked'], payload['all_likes'])
-        state = state.setIn(['disliked'], payload['all_dislikes'])
-        state = state.setIn(['items'], payload['items'])
+        
+ 	    let payload = action.payload
+        let keys = ["liked",
+                    "disliked",
+                    "items",
+                    "chat_history"];
+
+        keys.forEach(function (key, index) {
+            if(key in payload)
+                state = state.setIn([key], payload[key])
+            
+        });
 
         return state
 

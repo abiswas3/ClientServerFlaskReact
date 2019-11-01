@@ -35,10 +35,10 @@ let Chart = ({feedback, items}) => {
     cellRenderer={cellRenderer}
     columnCount={COLUMN_COUNT}
     rowCount={Math.ceil(items.length)}
-    columnWidth={380}    
-    rowHeight={300}
+    columnWidth={200}    
+    rowHeight={200}
     height={800}    
-    width={1600}
+    width={800}
     />
 }
 
@@ -50,7 +50,6 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
 
-    items: state.items
 })
 
 export default connect(mapStateToProps,
