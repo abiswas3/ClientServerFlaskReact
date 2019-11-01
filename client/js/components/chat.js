@@ -55,11 +55,11 @@ let Chat = ({chat_history}) => {
 
 
     return(<List
-           height={800}
+           height={900}
            rowCount={row_count}
            rowHeight={height_renderer}
            rowRenderer={rowRenderer}
            scrollToIndex={row_count - 1}
-           width={800 + 10}/>);
+           width={400 + 10}/>);
 }
 export default Chat

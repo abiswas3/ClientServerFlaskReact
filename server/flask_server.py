@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = str(random.random())
 
 socketio = SocketIO(app)
 
-@socketio.on('connect', namespace='/interact')
+@socketio.on('connect', namespace='/')
 def test_connect():
     print('Client connected')
     init_connection()
@@ -55,7 +55,7 @@ def init_connection():
 
     emit('result', data_to_send_over)
 
-@socketio.on('bin_feedback', namespace='/interact')
+@socketio.on('bin_feedback', namespace='/')
 def interaction(msg):
 
     for row in msg['items']:

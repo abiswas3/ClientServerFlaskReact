@@ -35,10 +35,10 @@ let Chart = ({feedback, items}) => {
     cellRenderer={cellRenderer}
     columnCount={COLUMN_COUNT}
     rowCount={Math.ceil(items.length)}
-    columnWidth={200}    
-    rowHeight={200}
-    height={800}    
-    width={800}
+    columnWidth={300}    
+    rowHeight={300}
+    height={900}    
+    width={900}
     />
 }
 

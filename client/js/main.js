@@ -5,7 +5,7 @@ import io from 'socket.io-client'
 import App from './components/App'
 import configureStore from './socket'
 
-let loc = 'http://' + window.location.hostname + ':' + window.location.port+'/interact';
+let loc = 'http://' + window.location.hostname + ':' + window.location.port;
 console.log(loc);
 
 const socket = io.connect(loc, {transports: ['websocket']})
