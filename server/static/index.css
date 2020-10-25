@@ -114,10 +114,11 @@ opacity: .99;
 }
 
 .red, .green, .blue {
+margin-top: 5px;
 position: absolute;
 width: 90%;
 color: white;
-height: 98%;
+height: 96%;
 text-align: center;
 box-shadow: 3px 0 3px 0px rgba(31, 73, 125, 0.8)}
 

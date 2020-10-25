@@ -14,8 +14,10 @@ let Chart = ({feedback, items}) => {
         
         return (<IImgCell imgToShow={linkPath} 
                           feedback={feedback} 
+                          row={rowIndex}
+                          col={columnIndex}
                           flagOn={items[rowIndex][columnIndex]['is_flipped']}
-                        stackOn={items[rowIndex][columnIndex]['is_stacked']}/>);
+                          stackOn={items[rowIndex][columnIndex]['is_stacked']}/>);
     }
 
     function cellRenderer ({columnIndex, key, rowIndex, style }) {

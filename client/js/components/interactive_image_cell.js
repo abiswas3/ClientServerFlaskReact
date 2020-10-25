@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-let IImgCell = ({imgToShow, feedback, flagOn, stackOn}) => {
+let IImgCell = ({imgToShow, feedback, flagOn, stackOn, row, col}) => {
 
-    let display = (imgToShow) => (<div >
+    let display = (imgToShow) => (<div onMouseEnter={()=> feedback(row, col)} onMouseLeave={()=> feedback(row, col)}>
                  <img src={imgToShow} className="image" ></img>           
                  <div className="middle">
                  <div className="btn-group">
-                 <button className="btn btn-primary" onClick={()=>feedback(1, 0)}><i className="em em---1"></i></button>
+                 <button className="btn btn-primary" onClick={()=>feedback(row, col)}><i className="em em---1"></i></button>
                  <button className="btn btn-primary" onClick={()=>feedback(-1, 0)}><i className="em em--1"></i></button>
                  </div>
                  </div>                                                  
@@ -17,11 +17,10 @@ let IImgCell = ({imgToShow, feedback, flagOn, stackOn}) => {
                         <span className="blue">{display(imgToShow)}</span>
                         </div>);
 
-    let back = (<div className={"stacked"}>                
-                <span className="blue">{display("https://e00-marca.uecdn.es/assets/multimedia/imagenes/2019/04/27/15563815885516.jpg")}</span>
+    let back = (<div>                
                 </div>);
 
-    console.log("Flag "+ flagOn);
+    // console.log("Flag "+ flagOn);
 
     let front_stacked = (<div className={"stacked"}>                
                 <span className="red">Red</span>

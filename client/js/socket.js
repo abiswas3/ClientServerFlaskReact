@@ -18,7 +18,7 @@ const socketMiddleware = socket => store => next => action => {
         socket.emit("bin_feedback",
                     {"all_likes": state.liked,
 		             "all_dislikes": state.disliked,
-		             "current_item": action.payload.id,
+		             "payload": action.payload,
 		             "label": action.payload.type,
 		             "items": state.items,
                      "chat_history": state.chat_history

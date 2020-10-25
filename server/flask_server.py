@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, request
 from flask_socketio import SocketIO, emit
-
+import pprint as pp
 import random
 import numpy as np
 
@@ -58,24 +58,29 @@ def init_connection():
 @socketio.on('bin_feedback', namespace='/')
 def interaction(msg):
 
-    for row in msg['items']:
-        for item in row:
+    print("Interaction", np.random.randint(10))
+    pp.pprint(msg["payload"])
+
+    for i, row in enumerate(msg['items']):
+        for j, item in enumerate(row):
+            if i == msg['payload']['type'] and j == msg['payload']['id']:
+                continue
             item['is_flipped'] = True if np.random.random() < 0.5 else False
 
     old_likes = msg['all_likes']
     old_dislikes = msg['all_dislikes']
 
-    curr_id = msg['current_item']
-    label = msg['label']
+    # curr_id = msg['current_item']
+    # label = msg['label']
 
-    if label == 1:
-        old_likes.append(curr_id)
-    else:
-        old_dislikes.append(curr_id)
+    # if label == 1:
+    #     old_likes.append(curr_id)
+    # else:
+    #     old_dislikes.append(curr_id)
 
 
-    data_to_send_over = {'all_likes': old_likes,
-                         'all_dislikes': old_dislikes,
+    data_to_send_over = {'all_likes': [],
+                         'all_dislikes': [],
                          'items': msg['items'],
                          'chat_history': msg['chat_history']}
 
