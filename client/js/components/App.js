@@ -15,16 +15,20 @@ let App = function({items, chat_history}){
 
     // Chat
     // <Chat chat_history={chat_history}/>
-    
-    return <div className="row">
 
-        <div className="col-xs-9"> <Chart items={items}/></div>
-        <div className={"col-xs-3"}>
+    // CHAT
+    // <div className={"col-xs-3"}>
+    // <Demo/>
+    // </div>
+    return (<div>
+                <div className="row">
+                    <div className="col-xs-12"><h3>{"Primo Search"}</h3></div>
+                </div>
 
-        <Demo/>
-        </div>
-
-        </div>
+                <div className="row">
+                    <div className="col-xs-12"> <Chart items={items}/></div>
+                </div>
+            </div>);
 }
 
 const mapDispatchToProps = {

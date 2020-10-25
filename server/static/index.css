@@ -1,7 +1,15 @@
 /*Image cell styling begin*/
+
+#main{
+  display: flex;
+  justify-content: center
+}
 .container {
     position: absolute;
     width: 100%;
+    left: 10px;
+
+
 }
 
 .image {
@@ -49,7 +57,7 @@
 .scene {
   width: 100%;
   height: 100%;
-  border: 10px solid #CCC;
+  border: 3px solid #363333;
   margin: 40px 0;
   perspective: 600px;
 }
@@ -58,7 +66,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  cursor: pointer;
+  /* cursor: pointer; */
   transform-style: preserve-3d;
   transform-origin: center right;
   transition: transform 1s;
@@ -67,6 +75,7 @@
 .card.is-flipped {
   transform: translateX(-100%) rotateY(-180deg);
 }
+
 
 .card__face {
   position: absolute;
@@ -95,4 +104,4 @@
   transform: rotateY(180deg);
 }
 
-*//*Image cell styling end*/
+/* NEW STUFF WITH STACKING */

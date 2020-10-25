@@ -24,8 +24,9 @@ let IImgCell = ({imgToShow, feedback, flagOn}) => {
                 </div>);
 
     console.log("Flag "+ flagOn);
-    
-    return (<div className="scene scene--card">
+
+
+    return (<div className={"scene"}>
             <div className={"card" + (flagOn ? " is-flipped":"")}>
             <div className="card__face card__face--front">{front}</div>
             <div className="card__face card__face--back">{back}</div>
@@ -34,5 +35,6 @@ let IImgCell = ({imgToShow, feedback, flagOn}) => {
 }
 
 export default IImgCell
+
 
 
