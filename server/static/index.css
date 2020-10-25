@@ -60,6 +60,7 @@
   border: 3px solid #363333;
   margin: 40px 0;
   perspective: 600px;
+
 }
 
 .card {
@@ -70,6 +71,8 @@
   transform-style: preserve-3d;
   transform-origin: center right;
   transition: transform 1s;
+  box-shadow: 3px 0 3px 0px rgba(31, 73, 125, 0.8);
+
 }
 
 .card.is-flipped {
@@ -116,8 +119,7 @@ width: 90%;
 color: white;
 height: 90%;
 text-align: center;
-box-shadow: 5px 10px #888888;
-}
+box-shadow: 3px 0 3px 0px rgba(31, 73, 125, 0.8)}
 
 .red {
 top: 0px;
@@ -126,14 +128,14 @@ left: 0px;
 }
 
 .green {
-top: 10px;
+top: 0px;
 left: 10px;
 /* background: green; */
 }
 
 .blue {
 z-index: 1;
-top: 20px;
+top: 0px;
 left: 20px;
 }
 
