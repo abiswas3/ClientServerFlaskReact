@@ -12,7 +12,10 @@ let Chart = ({feedback, items}) => {
 
 	    let linkPath = "https://the-drive.imgix.net/https%3A%2F%2Fapi.thedrive.com%2Fwp-content%2Fuploads%2F2019%2F03%2FGettyImages-1131427174.jpg%3Fquality%3D85?w=1440&auto=compress%2Cformat&ixlib=js-1.4.1&s=8ef2fc9b7b4746f614114b6e40c11ad9"
         
-	    return (<IImgCell imgToShow={linkPath} feedback={feedback} flagOn={items[rowIndex][columnIndex]['is_flipped']}/>);
+        return (<IImgCell imgToShow={linkPath} 
+                          feedback={feedback} 
+                          flagOn={items[rowIndex][columnIndex]['is_flipped']}
+                        stackOn={items[rowIndex][columnIndex]['is_stacked']}/>);
     }
 
     function cellRenderer ({columnIndex, key, rowIndex, style }) {

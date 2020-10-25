@@ -24,29 +24,29 @@ def init_connection():
                                           {"wizard": False, "text": str(np.random.random())},
                                           {"wizard": True, "text": str(np.random.random())}],
                                           
-                         'items': [[{'is_flipped': True, 'text': "Lionel Messi"},
-                                   {'is_flipped': False, 'text': "Lionel Messi"},
-                                   {'is_flipped': True, 'text': "Lionel Messi"}],
+                         'items': [[{'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
+                                   {'is_flipped': False, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
+                                   {'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False}],
 
-                                   [{'is_flipped': True, 'text': "Lionel Messi"},
-                                   {'is_flipped': False, 'text': "Lionel Messi"},
-                                   {'is_flipped': True, 'text': "Lionel Messi"}],
+                                   [{'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
+                                   {'is_flipped': False, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
+                                   {'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False}],
                                    
-                                   [{'is_flipped': True, 'text': "Lionel Messi"},
-                                   {'is_flipped': False, 'text': "Lionel Messi"},
-                                   {'is_flipped': True, 'text': "Lionel Messi"}],
+                                   [{'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
+                                   {'is_flipped': False, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
+                                   {'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False}],
                                    
-                                   [{'is_flipped': True, 'text': "Lionel Messi"},
-                                   {'is_flipped': False, 'text': "Lionel Messi"},
-                                   {'is_flipped': True, 'text': "Lionel Messi"}],
+                                   [{'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
+                                   {'is_flipped': False, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
+                                   {'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False}],
 
-                                   [{'is_flipped': True, 'text': "Lionel Messi"},
-                                   {'is_flipped': False, 'text': "Lionel Messi"},
-                                   {'is_flipped': True, 'text': "Lionel Messi"}],
+                                   [{'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
+                                   {'is_flipped': False, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
+                                   {'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False}],
                                    
-                                   [{'is_flipped': True, 'text': "Lionel Messi"},
-                                   {'is_flipped': False, 'text': "Lionel Messi"},
-                                   {'is_flipped': True, 'text': "Lionel Messi"}],
+                                   [{'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
+                                   {'is_flipped': False, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
+                                   {'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False}],
                                    
                                    
 

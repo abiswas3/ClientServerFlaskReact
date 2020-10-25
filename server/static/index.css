@@ -15,7 +15,7 @@
 .image {
   opacity: 1;
   display: block;
-  width: 100%;
+  width: 80%;
   height: auto;
   transition: .5s ease;
   backface-visibility: hidden;
@@ -105,3 +105,44 @@
 }
 
 /* NEW STUFF WITH STACKING */
+
+.stacked:first-child {
+opacity: .99; 
+}
+
+.red, .green, .blue {
+position: absolute;
+width: 90%;
+color: white;
+height: 90%;
+text-align: center;
+box-shadow: 5px 10px #888888;
+}
+
+.red {
+top: 0px;
+left: 0px;
+/* background: red; */
+}
+
+.green {
+top: 10px;
+left: 10px;
+/* background: green; */
+}
+
+.blue {
+z-index: 1;
+top: 20px;
+left: 20px;
+}
+
+.stacked {
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  text-align: right;
+  padding: 5px;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
