@@ -22,7 +22,9 @@ let App = function({items, chat_history}){
     // </div>
     return (<div>
                 <div className="row">
-                    <div className="col-xs-12"><h3>{"Primo Search"}</h3></div>
+                    <div className="col-xs-12">
+                        <h3>{"Primo Search: Context aware interactive browse"}</h3>
+                    </div>
                 </div>
 
                 <div className="row">
