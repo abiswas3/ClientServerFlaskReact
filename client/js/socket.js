@@ -11,11 +11,11 @@ const socketMiddleware = socket => store => next => action => {
 
     switch (action.type) {
 
-    case actions.BINARY_FEEDBACK:{
+    case actions.HOVER:{
 
 	let state = store.getState();
 
-        socket.emit("bin_feedback",
+        socket.emit("hover",
                     {"all_likes": state.liked,
 		             "all_dislikes": state.disliked,
 		             "payload": action.payload,

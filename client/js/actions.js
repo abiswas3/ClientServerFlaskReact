@@ -4,6 +4,15 @@ const actions = {}
 export default actions
 actions.UPDATE_STORE =  'UPDATE_STORE'
 actions.BINARY_FEEDBACK = 'BINARY_FEEDBACK'
+actions.HOVER = 'HOVER'
+
+export function hover(rowIndex, colIndex){
+
+    return {
+        type: actions.HOVER,
+        payload: {'rowIndex': rowIndex, 'colIndex': colIndex}
+    };
+}
 
 export function binary_feedback(nature, id){
     return {

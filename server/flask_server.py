@@ -3,11 +3,14 @@ from flask_socketio import SocketIO, emit
 import pprint as pp
 import random
 import numpy as np
+import data_loader
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = str(random.random())
 
 socketio = SocketIO(app)
+
+womens_shoes = data_loader.WomensShoes(max_num_items=1000)
 
 @socketio.on('connect', namespace='/')
 def test_connect():
@@ -17,42 +20,17 @@ def test_connect():
 
 def init_connection():
 
+    viz_mat = womens_shoes.viz_data(womens_shoes.items)
+    
     data_to_send_over = {'all_likes': [],
                          'all_dislikes': [],
-                         'chat_history': [{"wizard": False, "text": str(np.random.random())},
-                                          {"wizard": True, "text": str(np.random.random())},
-                                          {"wizard": False, "text": str(np.random.random())},
-                                          {"wizard": True, "text": str(np.random.random())}],
+                         'chat_history': [{"wizard": False, "text": "str(np.random.random()"},
+                                          {"wizard": True, "text": ""},
+                                          {"wizard": False, "text": ""},
+                                          {"wizard": True, "text": "str(np.random.random())"}],
                                           
-                         'items': [[{'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
-                                   {'is_flipped': False, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
-                                   {'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False}],
-
-                                   [{'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
-                                   {'is_flipped': False, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
-                                   {'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False}],
-                                   
-                                   [{'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
-                                   {'is_flipped': False, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
-                                   {'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False}],
-                                   
-                                   [{'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
-                                   {'is_flipped': False, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
-                                   {'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False}],
-
-                                   [{'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
-                                   {'is_flipped': False, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
-                                   {'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False}],
-                                   
-                                   [{'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
-                                   {'is_flipped': False, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False},
-                                   {'is_flipped': True, 'text': "Lionel Messi", 'is_stacked': True if np.random.random() < 0.5 else False}],
-                                   
-                                   
-
-                         ]
+                         'items': viz_mat
     }
-
     emit('result', data_to_send_over)
 
 @socketio.on('bin_feedback', namespace='/')
