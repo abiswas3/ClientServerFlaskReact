@@ -6,18 +6,16 @@ actions.UPDATE_STORE =  'UPDATE_STORE'
 actions.BINARY_FEEDBACK = 'BINARY_FEEDBACK'
 actions.HOVER = 'HOVER'
 
-export function hover(rowIndex, colIndex){
-
+export function hover(rowIndex, colIndex, inOrOut){
     return {
         type: actions.HOVER,
-        payload: {'rowIndex': rowIndex, 'colIndex': colIndex}
-    };
+        payload: {'rowIndex': rowIndex, 'colIndex': colIndex, 'inOrOut': inOrOut}
+    }
 }
 
 export function binary_feedback(nature, id){
     return {
         type: actions.BINARY_FEEDBACK,
-	//+1 or -1 for like and dislike
         payload: {'type': nature, 'id': id}
     }
 }

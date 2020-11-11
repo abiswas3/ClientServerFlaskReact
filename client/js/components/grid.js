@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import {binary_feedback, hover} from '../actions'
 
 const COLUMN_COUNT = 3
-let Chart = ({feedback, items}) => {
+let Chart = ({feedback, hover, items}) => {
  
     let imageCell = (rowIndex, columnIndex) =>{
 
@@ -18,7 +18,7 @@ let Chart = ({feedback, items}) => {
                           hover={hover}
                           row={rowIndex}
                           col={columnIndex}
-                          flagOn={items[rowIndex][columnIndex]['is_flipped']}
+                          flagOn={items[rowIndex][columnIndex]['flipped']}
                           stackOn={items[rowIndex][columnIndex]['is_stacked']}/>);
     }
 
@@ -52,7 +52,8 @@ let Chart = ({feedback, items}) => {
 
 const mapDispatchToProps = {
 
-    feedback : binary_feedback
+    feedback : binary_feedback,
+    hover: hover
 }
 
 const mapStateToProps = state => ({

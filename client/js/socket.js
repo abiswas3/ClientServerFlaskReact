@@ -9,21 +9,18 @@ import actions, {select_race, update_store} from './actions'
 // the socket when appropriate
 const socketMiddleware = socket => store => next => action => {
 
+
     switch (action.type) {
 
     case actions.HOVER:{
 
 	let state = store.getState();
 
-        socket.emit("hover",
-                    {"all_likes": state.liked,
-		             "all_dislikes": state.disliked,
-		             "payload": action.payload,
-		             "label": action.payload.type,
-		             "items": state.items,
-                     "chat_history": state.chat_history
-		    }
-                   )
+    socket.emit("hover",
+                {"payload": action.payload,
+                "items": state.items,
+                "old_ranking": state.old_ranking,
+                "chat_history": state.chat_history})
 
     }
 
@@ -56,7 +53,8 @@ function configureStore(socket) {
     // Register event handlers for incoming API responses
     socket.on('result', (msg) => {
 
-	if(msg['items'].length > 0)
+    if(msg['items'].length > 0)
+        console.log('Results');
 	    store.dispatch(update_store(msg))	
 
     })

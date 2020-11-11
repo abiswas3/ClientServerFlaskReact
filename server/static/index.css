@@ -15,8 +15,8 @@
 .image {
   opacity: 1;
   display: block;
-  width: 80%;
-  height: auto;
+  width: 150px;
+  height: 150px;
   transition: .5s ease;
   backface-visibility: hidden;
 }
@@ -148,4 +148,17 @@ left: 20px;
   box-sizing: border-box;
   height: 100%;
   width: 100%;
+}
+
+.myButton {
+    
+  /* display:block; */
+  /* float:right; */
+  background-color: green;
+  position: fixed; /* or position: absolute; */
+  top: 0;
+  right: 0;  
+  height: 20px;
+  width: 20px;
+  
 }

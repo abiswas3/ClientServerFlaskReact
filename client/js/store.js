@@ -5,6 +5,7 @@ export const State = Immutable.Record({
     'liked': [],
     'disliked': [],
     'items': [],
+    'old_ranking': [],
     'chat_history': []
 })
 
@@ -20,6 +21,7 @@ export function reducer(state, action) {
         let keys = ["liked",
                     "disliked",
                     "items",
+                    "old_ranking",
                     "chat_history"];
 
         keys.forEach(function (key, index) {

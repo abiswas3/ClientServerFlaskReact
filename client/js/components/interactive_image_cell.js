@@ -3,8 +3,14 @@ import ReactDOM from 'react-dom';
 
 let IImgCell = ({imgToShow, feedback, hover, flagOn, stackOn, row, col}) => {
 
-    let display = (imgToShow) => (<div onMouseEnter={()=> hover(row, col)} onMouseLeave={()=> hover(row, col)}>
-                 <img src={imgToShow} className="image" ></img>           
+
+
+    onMouseEnter={()=> hover(row, col, +1)} onMouseLeave={()=> hover(row, col, -1)}
+
+    let img_id = "https://m.media-amazon.com/images/I/" + imgToShow + "._AC_UL320_.jpg"
+    let display = (imgToShow) => (<div >
+                 <a href="#" className="myButton" ></a>
+                 <img src={img_id} className="image" ></img>           
                  <div className="middle">
                  <div className="btn-group">
                  <button className="btn btn-primary" onClick={()=>feedback(row, col)}><i className="em em---1"></i></button>
