@@ -42,7 +42,7 @@ const socketMiddleware = socket => store => next => action => {
     }
 }
 
-function configureStore(socket) {
+function setupStore(socket) {
 
     
     // Create store, binding it to outgoing API requests through the middleware
@@ -63,4 +63,4 @@ function configureStore(socket) {
     return store
 }
 
-export default configureStore
+export default setupStore

@@ -1,4 +1,3 @@
-
 // action types
 const actions = {}
 export default actions
@@ -20,5 +19,3 @@ export function update_store(server_payload){
         payload: server_payload
     }
 }
-
-

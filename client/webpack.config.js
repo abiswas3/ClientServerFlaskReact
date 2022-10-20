@@ -1,61 +1,31 @@
-
-var webpack = require('webpack');
-var path = require('path');
-
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: './js/main.js',       // 
-    output: {
-        filename: '../server/static/bundle.js',
-    },
-    devServer: {
-        hot: true,
-        inline: true,
-    },
-    devtool: 'source-map',
-    plugins: [
-        new CopyWebpackPlugin([
-        ]),
-        new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-    ],
-    
+    entry: path.join(__dirname, "src", "index.js"),
+    output: { path: path.join(__dirname, "build"), filename: "index.bundle.js" },
+    mode: process.env.NODE_ENV || "development",
+    resolve: { modules: [path.resolve(__dirname, "src"), "node_modules"] },
+    devServer: { static: path.join(__dirname, "src"),
+                 port: 8080},
     module: {
+        rules: [
+            { 
+                test: /\.(js|jsx)$/, 
+                exclude: /node_modules/, 
+                use: ["babel-loader"] 
+            },
+            { 
+                test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
+                use: ["file-loader"] 
+            },
+        ],
+    },    
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, "src", "index.html"),
+        }),
+    ],
+};
 
-        rules: [{ 
-            test: /\.jsx?$/,
-            exclude: /(node_modules|bower_components)/,
-            use: [
-                {
-                    loader: 'react-hot-loader'
-                }, 
-                {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['es2015', 'es2016', 'react'],
-                        plugins: [
-                            'transform-object-rest-spread', 
-                            'transform-class-properties',
-                            'transform-decorators-legacy'
-                        ]
-                    }
-                }]
-        },
-                {
-                    test: /\.css$/,
-                    loaders: ["style-loader","css-loader"]
-                },
 
-                {
-
-                    test: /\.(png|svg|jpg|gif|mp3)$/,
-                    use: [
-                        'file-loader'
-                    ]
-                }
-        ]
-    }
-
-    
-}
